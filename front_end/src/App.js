@@ -6,18 +6,19 @@ import MapComponent from "./componets/Map/MapComponent";
 import PlaceDetails from "./componets/PlaceDetails/PlaceDetails";
 
 const App = () => {
+
   return (
-    <>
+    <div>
       <Grid container spacing={1}>
-        <Grid item xs={3} >
+        <Grid item xs={3}>
           <Features />
           <PlaceDetails />
         </Grid>
-        <Grid item xs={9} >
+        <Grid item xs={9}>
           <MapComponent />
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

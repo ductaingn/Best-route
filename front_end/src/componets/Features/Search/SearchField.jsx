@@ -1,44 +1,36 @@
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import { IconButton } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-
-import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-
+import { useStore } from "../../../store";
+import {
+  TextField,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import "./SearchField.css";
 
-// -------------------
-const SearchField = ({
-  handleField,
-  index,
-  handleAddLocation,
-  handleRemoveLocation,
-  locationList,
-}) => {
+const SearchField = () => {
+  const [state, dispatch] = useStore();
+
   const [input, setInput] = useState("");
-  const [results, setResults] = useState([]);
-  // -------------------------------
+  const [searchResults, setSearchResults] = useState([]);
 
   const addressesData = require("./data.json");
 
   return (
-    <>
-      <Grid container alignItems="center" justifyContent="center" spacing={0.5}>
-        <Grid item md={10}>
+    <div>
+      <Grid container alignItems="center" justifyContent="center">
+        <Grid>
           <TextField
             label="Search Field"
             variant="outlined"
             value={input}
+            fullWidth
             onChange={(e) => {
               setInput(e.target.value);
-
               const searchString = e.target.value.toLowerCase();
-              setResults(
+              setSearchResults(
                 addressesData.filter((address) => {
                   return `${address.properties["name"]} ${address.properties["addr:housenumber"]} ${address.properties["addr:street"]}`
                     .toLowerCase()
@@ -46,50 +38,32 @@ const SearchField = ({
                 })
               );
             }}
-            fullWidth
           />
-        </Grid>
-        <Grid item md="auto">
-          {index ? (
-            <IconButton
-              onClick={() => {
-                handleField(index);
-                handleRemoveLocation(index);
-                setInput(locationList[index + 1]);
-              }}
-            >
-              <DeleteRoundedIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              onClick={() => {
-                handleField(index);
-              }}
-            >
-              <AddLocationAltRoundedIcon />
-            </IconButton>
-          )}
         </Grid>
         <Grid item>
           <List className="result-list">
-            {results.map((result) => {
+            {searchResults.map((result) => {
               return (
                 <ListItem disablePadding>
                   <ListItemButton
                     onClick={() => {
-                      const add = `${result.properties["name"]} ${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`;
-                      setInput(add);
-                      handleAddLocation(add);
-                      setResults([]);
+                      setInput("");
+                      const address = result.properties["name"]
+                        ? `${result.properties["name"]} ${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`
+                        : `${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`;
+                      dispatch({
+                        type: "ADD_POS",
+                        name: address,
+                        position: result.geometry.coordinates,
+                      });
+                      setSearchResults([]);
                     }}
                   >
                     <ListItemText
                       primary={
-                        result.properties.name +
-                        " " +
-                        result.properties["addr:housenumber"] +
-                        " " +
-                        result.properties["addr:street"]
+                        result.properties["name"]
+                          ? `${result.properties["name"]} ${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`
+                          : `${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`
                       }
                     />
                   </ListItemButton>
@@ -99,7 +73,7 @@ const SearchField = ({
           </List>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

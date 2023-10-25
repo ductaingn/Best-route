@@ -1,37 +1,40 @@
-import React, { useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMapEvents,
-} from "react-leaflet";
+import React from "react";
+import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import { useMapEvent } from "react-leaflet/hooks";
+import { useStore } from "../../store";
 
 const MapComponent = () => {
-  const [position, setPosition] = useState([21.0404518, 105.8206392]);
-  const [selectedPosition, setSelectedPosition] = useState([0, 0]);
+  const [state, dispatch] = useStore();
+  const addPosition = (latlng) => {
+    dispatch({
+      type: "ADD_POS",
+      name: `[${latlng.lat}, ${latlng.lng}]`,
+      position: [latlng.lat, latlng.lng],
+    });
+  };
 
-  const Markers = () => {
-    const map = useMapEvents({
-      click(e) {
-        setSelectedPosition([e.latlng.lat, e.latlng.lng]);
-        console.log(e.latlng);
-      },
+  const MapClick = () => {
+    const map = useMapEvent("click", (e) => {
+      addPosition(e.latlng);
     });
 
-    return selectedPosition ? (
-      <Marker
-        key={selectedPosition}
-        position={selectedPosition}
-        interactive={false}
-      />
-    ) : null;
+    return (
+      <>
+        {state.map((address, index) => (
+          <Marker key={index} position={address.position}>
+            <Popup>
+              position {index+1}
+            </Popup>
+          </Marker>
+        ))}
+      </>
+    );
   };
 
   return (
     <div>
       <MapContainer
-        center={position}
+        center={[21.04045, 105.82063]}
         zoom={16}
         style={{ width: "100%", height: "calc(100vh - 1rem)" }}
       >
@@ -39,7 +42,7 @@ const MapComponent = () => {
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Markers />
+        <MapClick />
       </MapContainer>
     </div>
   );
