@@ -68,3 +68,5 @@ def a_star(start_point,end_point):
                 distance.update({node_data[0]:g})
                 boundary_nodes.update({tuple(node_data):(g+h)})
     return []
+
+print(a_star([21.0347047,105.8143796],[21.0346086,105.8147965]))
