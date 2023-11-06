@@ -1,6 +1,5 @@
 # Trong tệp Flask (app.py)
 from flask import Flask, request, jsonify
-import astar
 
 app = Flask(__name__)
 
@@ -11,9 +10,6 @@ def handle_data():
     global received_text
 
     if request.method == "GET":
-        # Gọi hàm astar và truyền dữ liệu (ở đây là 1234)
-        received_text = astar.astar(1234)
-
         # Trả về kết quả làm chuỗi trong yêu cầu GET
         return received_text
 
@@ -21,9 +17,6 @@ def handle_data():
         if request.headers["Content-Type"] == "application/json":
             data = request.json
             position = data.get("positions", "")
-
-            # Gọi hàm astar và truyền dữ liệu (ở đây là position)
-            received_text = astar.astar(position)
 
             # In kết quả ra console
             print(f"Nội dung từ React: {position}")
