@@ -15,6 +15,7 @@ for (let i = 1; i <= 5; i++) {
 }
 
 const MapComponent = () => {
+>>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
   const [state, dispatch] = useStore();
   const line = state.map(address => address.position)
   const addPosition = (latlng) => {
@@ -35,7 +36,11 @@ const MapComponent = () => {
         {state.map((address, index) => (
           <Marker key={index} position={address.position} icon={markerIcons[index%5]}>
             <Popup>
+<<<<<<< HEAD
+              position {index + 1}
+=======
               position {index+1}
+>>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
             </Popup>
           </Marker>
           ))}
@@ -60,4 +65,8 @@ const MapComponent = () => {
     </div>
   );
 };
+<<<<<<< HEAD
+
+=======
+>>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
 export default MapComponent;
