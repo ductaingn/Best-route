@@ -1,24 +1,18 @@
-<<<<<<< HEAD
-import React, { useState, useEffect, useContext  } from "react";
+import React, { useEffect, useContext } from "react";
 import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 import { useMapEvent } from "react-leaflet/hooks";
 import { useStore } from "../../store";
 import { dataContext } from "../Features/SearchButton";
 
 const MapComponent = () => {
-
-  const data = useContext(dataContext);
-  console.log(data);
-
-=======
-import React from "react";
-import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
-import { useMapEvent } from "react-leaflet/hooks";
-import { useStore } from "../../store";
-
-const MapComponent = () => {
->>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
   const [state, dispatch] = useStore();
+  const data = useContext(dataContext);
+
+  useEffect(() => {
+    console.log(state);
+    // Xử lý thay đổi state ở đây
+  }, [state]);
+
   const addPosition = (latlng) => {
     dispatch({
       type: "ADD_POS",
@@ -34,17 +28,12 @@ const MapComponent = () => {
 
     return (
       <>
-        {state.map((address, index) => (
-          <Marker key={index} position={address.position}>
-            <Popup>
-<<<<<<< HEAD
-              position {index + 1}
-=======
-              position {index+1}
->>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
-            </Popup>
-          </Marker>
-        ))}
+        {state &&
+          state.map((address, index) => (
+            <Marker key={index} position={address.position}>
+              <Popup>position {index + 1}</Popup>
+            </Marker>
+          ))}
       </>
     );
   };
@@ -65,8 +54,5 @@ const MapComponent = () => {
     </div>
   );
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> d3e7256285fbe5567dbda7cb9429d3e15742c1ef
 export default MapComponent;

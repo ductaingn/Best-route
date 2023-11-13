@@ -9,7 +9,7 @@ def find_nearest_node(point):
     start_time = time.time()
     
     # Read data from the Excel file
-    df = pd.read_csv("./data/nodes.csv")
+    df = pd.read_csv("../data/nodes.csv")
     # x = list(map(float, x_input.split(',')))
 
     # Fit the KNN model
