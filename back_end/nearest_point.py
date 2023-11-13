@@ -28,5 +28,4 @@ def find_nearest_node(point):
     print("Execution time:",execution_time)
 
     return nearest_node_id
-
-print(find_nearest_node([21.0347047,105.8143797]))
+ #print(find_nearest_node([21.0347047,105.8143797]))
