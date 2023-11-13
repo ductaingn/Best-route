@@ -1,2 +1,12 @@
 .vscode
 test.py
+back_end/.venv
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/

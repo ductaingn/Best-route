@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-from collections import OrderedDict
-import math
 from sklearn.neighbors import NearestNeighbors
 import time
 import nearest_point
@@ -12,8 +10,8 @@ def a_star(start_point, end_point):
     start_node_id = nearest_point.find_nearest_node(start_point)
     end_node_id = nearest_point.find_nearest_node(end_point)
 
-    node_df = pd.read_csv("./data/nodes.csv")
-    edge_df = pd.read_csv("./data/edges.csv")
+    node_df = pd.read_csv("data/nodes.csv")
+    edge_df = pd.read_csv("data/edges.csv")
 
     # start_node_data = [osmid,x,y]
     start_node_data = node_df.loc[node_df['osmid'] ==
@@ -45,7 +43,7 @@ def a_star(start_point, end_point):
             previous_id = came_from.get(path[len(path)-1])
             came_from.pop(path[len(path)-1])
             path.append(int(previous_id))
-        return np.array(path, dtype=int).tolist()
+        return np.array(path).tolist()
 
     while (len(boundary_nodes) > 0):
         current_node_data = np.array(
