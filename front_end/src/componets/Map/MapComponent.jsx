@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import {
   MapContainer,
   Marker,
@@ -12,6 +12,7 @@ import L from "leaflet";
 import pointInPolygon from "./pointInPolygon";
 import { useMapEvent } from "react-leaflet/hooks";
 import { useStore } from "../../store";
+import RouteContext from "../../context/RouteContext";
 
 const markerIcons = [];
 for (let i = 1; i <= 5; i++) {
@@ -28,6 +29,9 @@ const border = require("./border.json");
 const MapComponent = () => {
   const [openArlet, setOpenArlet] = useState(false);
   const [state, dispatch] = useStore();
+
+  const { route } = useContext(RouteContext);
+
   const line = state.map((address) => address.position);
 
   const addPosition = (latlng) => {
@@ -76,6 +80,11 @@ const MapComponent = () => {
           weight={2}
           opacity={0.9}
           dashArray="20, 10, 4, 10"
+        />
+        <Polyline
+          positions={route}
+          color="#039be5"
+          weight={2}
         />
         <Snackbar
           open={openArlet}
