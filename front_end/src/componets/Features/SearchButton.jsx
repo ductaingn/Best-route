@@ -5,7 +5,6 @@ import MapComponent from "../Map/MapComponent";
 
 export const dataContext = createContext();
 
-
 const SearchButton = () => {
   const [state, dispatch] = useStore();
   const [responseText, setResponseText] = useState("");
@@ -27,6 +26,7 @@ const SearchButton = () => {
       .then((response) => response.text())
       .then((responseText) => {
         console.log(responseText); // Print Flask server response to the console
+        setResponseText(responseText); // Update the context with the responseText
       })
       .catch((error) => {
         console.error('Error sending data:', error);
@@ -40,7 +40,7 @@ const SearchButton = () => {
           Find the way
         </Button>
       </Box>
-      <MapComponent/>
+      <MapComponent />
     </dataContext.Provider>
   );
 };
