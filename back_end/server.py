@@ -1,6 +1,7 @@
 # Trong tệp Flask (app.py)
 from flask import Flask, request, jsonify
 import a_star
+import node_id_to_latlon
 
 app = Flask(__name__)
 
@@ -13,8 +14,6 @@ def handle_data():
 
     if request.method == "GET":
         # Trả về kết quả làm chuỗi trong yêu cầu GET
-        received_text = a_star.a_star([21.0347047, 105.8143796], [
-                                      21.0346086, 105.8147965])
         return jsonify(received_text)
 
     if request.method == "POST":
@@ -22,11 +21,12 @@ def handle_data():
             data = request.json
             position = data.get("positions", "")
 
-            # In kết quả ra console
-            print(f"Nội dung từ React: {position}")
-
             # Trả về một thông báo trong yêu cầu POST (nếu cần)
-            return "Dữ liệu đã được nhận và xử lý bởi Flask."
+            if(len(position)==0):
+                return "Empty list"
+            list_of_node = a_star.a_star(position[0],position[1])
+            received_text = node_id_to_latlon.id_to_latlon(list_of_node)
+            return jsonify(received_text)
 
 
 if __name__ == "__main__":
