@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 import { useMapEvent } from "react-leaflet/hooks";
 import { useStore } from "../../store";
+import { dataContext } from "../Features/SearchButton";
 
 const MapComponent = () => {
   const [state, dispatch] = useStore();
+  const data = useContext(dataContext);
+
+  useEffect(() => {
+    console.log(state);
+    // Xử lý thay đổi state ở đây
+  }, [state]);
+
   const addPosition = (latlng) => {
     dispatch({
       type: "ADD_POS",
@@ -20,13 +28,12 @@ const MapComponent = () => {
 
     return (
       <>
-        {state.map((address, index) => (
-          <Marker key={index} position={address.position}>
-            <Popup>
-              position {index+1}
-            </Popup>
-          </Marker>
-        ))}
+        {state &&
+          state.map((address, index) => (
+            <Marker key={index} position={address.position}>
+              <Popup>position {index + 1}</Popup>
+            </Marker>
+          ))}
       </>
     );
   };
@@ -47,4 +54,5 @@ const MapComponent = () => {
     </div>
   );
 };
+
 export default MapComponent;
