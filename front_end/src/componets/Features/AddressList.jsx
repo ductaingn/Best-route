@@ -1,10 +1,19 @@
 import React from "react";
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import { useStore } from "../../store";
 
-const AddressList = (position) => {
+const AddressList = () => {
   const [state, dispatch] = useStore();
+
+  const colors = ["#e53935", "#5e35b1", "#039be5", "#43a047", "#ffb300"];
 
   const handleDeletePosition = (position) => {
     dispatch({
@@ -29,6 +38,9 @@ const AddressList = (position) => {
               </IconButton>
             }
           >
+            <ListItemIcon>
+              <LocationOnRoundedIcon style={{ color: colors[index % 5] }} />
+            </ListItemIcon>
             <ListItemText primary={address.name} />
           </ListItem>
         ))}
