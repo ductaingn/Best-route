@@ -77,9 +77,16 @@ const MapComponent = () => {
         <Polyline
           positions={border}
           color="#F45990"
-          weight={2}
+          weight={8}
           opacity={0.9}
-          dashArray="20, 10, 4, 10"
+          smoothFactor={0.1}
+          dashArray="12,4,4, 12"
+        />
+        <Polyline
+          positions={route}
+          color="#039be5"
+          weight={4}
+          smoothFactor={0.1}
         />
         <Polyline
           positions={route}

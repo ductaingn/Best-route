@@ -26,7 +26,10 @@ def handle_data():
                 return "Empty list"
             list_of_node = a_star.a_star(position[0],position[1])
             received_text = node_id_to_latlon.id_to_latlon(list_of_node)
+            received_text.insert(0,position[0])
+            received_text.append(position[1])
             return jsonify(received_text)
+
 
 
 if __name__ == "__main__":
