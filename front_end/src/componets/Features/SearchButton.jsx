@@ -1,14 +1,13 @@
-import React, { useState, useContext, createContext } from "react";
-import { Button, Box } from "@mui/material";
+import React, { createContext, useContext } from "react";
+import { Button } from "@mui/material";
 import { useStore } from "../../store";
-import MapComponent from "../Map/MapComponent";
+import RouteContext from "../../context/RouteContext";
 
 export const dataContext = createContext();
 
-
 const SearchButton = () => {
-  const [state, dispatch] = useStore();
-  const [responseText, setResponseText] = useState("");
+  const [state] = useStore();
+  const { setRoute } = useContext(RouteContext)
 
   const handleFindWay = () => {
     console.log("find the way");
@@ -17,31 +16,29 @@ const SearchButton = () => {
     const positions = state.map((address) => address.position);
 
     // Send the positions array to Flask
-    fetch('/send_data', {
-      method: 'POST',
+    fetch("/send_data", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ positions }), // Send an object with positions
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((responseText) => {
         console.log(responseText); // Print Flask server response to the console
+        if(responseText){
+          setRoute(responseText); // Update the context with the responseText
+        }
       })
       .catch((error) => {
-        console.error('Error sending data:', error);
+        console.error("Error sending data:", error);
       });
   };
 
   return (
-    <dataContext.Provider value={responseText}>
-      <Box>
-        <Button variant="contained" onClick={handleFindWay}>
-          Find the way
-        </Button>
-      </Box>
-      <MapComponent/>
-    </dataContext.Provider>
+    <Button variant="contained" onClick={handleFindWay}>
+      Find the way
+    </Button>
   );
 };
 

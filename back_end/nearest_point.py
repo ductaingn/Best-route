@@ -4,13 +4,10 @@ from sklearn.neighbors import NearestNeighbors
 import time
 
 def find_nearest_node(point):
-    # x_input = input("Enter the coordinates of point X (in the format x,y): ")
-
     start_time = time.time()
     
     # Read data from the Excel file
-    df = pd.read_csv("data/nodes.csv")
-    # x = list(map(float, x_input.split(',')))
+    df = pd.read_csv("../data/nodes.csv")
 
     # Fit the KNN model
     X = df[['y', 'x']]

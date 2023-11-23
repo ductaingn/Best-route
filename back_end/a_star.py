@@ -10,8 +10,8 @@ def a_star(start_point, end_point):
     start_node_id = nearest_point.find_nearest_node(start_point)
     end_node_id = nearest_point.find_nearest_node(end_point)
 
-    node_df = pd.read_csv("data/nodes.csv")
-    edge_df = pd.read_csv("data/edges.csv")
+    node_df = pd.read_csv("../data/nodes.csv")
+    edge_df = pd.read_csv("../data/edges.csv")
 
     # start_node_data = [osmid,x,y]
     start_node_data = node_df.loc[node_df['osmid'] ==
