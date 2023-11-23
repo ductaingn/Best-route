@@ -88,6 +88,11 @@ const MapComponent = () => {
           weight={4}
           smoothFactor={0.1}
         />
+        <Polyline
+          positions={route}
+          color="#039be5"
+          weight={2}
+        />
         <Snackbar
           open={openArlet}
           autoHideDuration={1500}
