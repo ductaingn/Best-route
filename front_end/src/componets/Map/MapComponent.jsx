@@ -63,29 +63,44 @@ const MapComponent = () => {
             <Popup>position {index + 1}</Popup>
           </Marker>
         ))}
-        {state ? (
+        {(state && route[0]) ? (
+          <>
+
           <Polyline
-            positions={line}
-            color="#3f51b5"
+            positions={route}
+            color="#1e88e5"
             weight={3}
             opacity={0.9}
-            dashArray="10, 5"
           />
+
+          <Polyline
+            positions={[line[0], route[0]]}
+            color="#1e88e5"
+            weight={3}
+            opacity={0.7}
+            dashArray="10, 5"
+            smoothFactor={0.1}
+          />
+          <Polyline
+            positions={[route[route.length - 1], line[line.length - 1]]}
+            color="#1e88e5"
+            weight={3}
+            opacity={0.7}
+            dashArray="10, 5"
+            smoothFactor={0.1}
+          />
+        </>
         ) : (
           <Fragment />
         )}
         <Polyline
           positions={border}
-          color="#F45990"
-          weight={2}
+          color="#616161"
+          weight={5}
           opacity={0.9}
-          dashArray="20, 10, 4, 10"
+          smoothFactor={0.1}
         />
-        <Polyline
-          positions={route}
-          color="#039be5"
-          weight={2}
-        />
+
         <Snackbar
           open={openArlet}
           autoHideDuration={1500}
@@ -102,7 +117,7 @@ const MapComponent = () => {
   return (
     <div>
       <MapContainer
-        center={[21.04045, 105.82063]}
+        center={[21.037866, 105.8174506]}
         zoom={16}
         style={{ width: "100%", height: "calc(100vh - 1rem)" }}
       >

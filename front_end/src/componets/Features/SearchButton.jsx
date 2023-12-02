@@ -23,10 +23,12 @@ const SearchButton = () => {
       },
       body: JSON.stringify({ positions }), // Send an object with positions
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((responseText) => {
         console.log(responseText); // Print Flask server response to the console
-        setRoute(responseText); // Update the context with the responseText
+        if(responseText){
+          setRoute(responseText); // Update the context with the responseText
+        }
       })
       .catch((error) => {
         console.error("Error sending data:", error);
