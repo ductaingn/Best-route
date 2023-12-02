@@ -27,7 +27,7 @@ const AddressList = () => {
   };
 
   return (
-    <div>
+    <div style={{width: 330}}>
       <List>
         {state.map((address, index) => (
           <ListItem
@@ -43,7 +43,7 @@ const AddressList = () => {
               </IconButton>
             }
           >
-            <ListItemIcon>
+            <ListItemIcon style={{width: 10}}>
               <LocationOnRoundedIcon style={{ color: colors[index % 5] }} />
             </ListItemIcon>
             <ListItemText primary={address.name} />
