@@ -52,7 +52,7 @@ const SearchField = () => {
                         ? `${result.properties["name"]} ${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`
                         : `${result.properties["addr:housenumber"]} ${result.properties["addr:street"]}`;
                       dispatch({
-                        type: "ADD_POS",
+                        type: "ADD_POS_BY_SEARCH",
                         name: address,
                         position: result.geometry.coordinates,
                       });

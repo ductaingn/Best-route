@@ -1,22 +1,44 @@
-import React from "react";
-import { Button, Box } from "@mui/material";
+import React, { createContext, useContext } from "react";
+import { Button } from "@mui/material";
 import { useStore } from "../../store";
+import RouteContext from "../../context/RouteContext";
+
+export const dataContext = createContext();
 
 const SearchButton = () => {
-  const [state, dispatch] = useStore();
+  const [state] = useStore();
+  const { setRoute } = useContext(RouteContext)
 
   const handleFindWay = () => {
     console.log("find the way");
-    state.map((address) => {
-      console.log(address.position);
-    });
+
+    // Create an array of positions from your state
+    const positions = state.map((address) => address.position);
+
+    // Send the positions array to Flask
+    fetch("/send_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ positions }), // Send an object with positions
+    })
+      .then((response) => response.json())
+      .then((responseText) => {
+        console.log(responseText); // Print Flask server response to the console
+        if(responseText){
+          setRoute(responseText); // Update the context with the responseText
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+      });
   };
+
   return (
-    <Box>
-      <Button variant="contained" onClick={handleFindWay}>
-        Find the way
-      </Button>
-    </Box>
+    <Button variant="contained" onClick={handleFindWay}>
+      Find the way
+    </Button>
   );
 };
 
