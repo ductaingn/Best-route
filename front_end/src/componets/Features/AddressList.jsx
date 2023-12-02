@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createContext, useContext} from "react";
 import {
   IconButton,
   List,
@@ -9,9 +9,13 @@ import {
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import { useStore } from "../../store";
+import RouteContext from "../../context/RouteContext";
+
+export const dataContext = createContext();
 
 const AddressList = () => {
   const [state, dispatch] = useStore();
+  const { setRoute } = useContext(RouteContext)
 
   const colors = ["#e53935", "#5e35b1", "#039be5", "#43a047", "#ffb300"];
 
@@ -32,6 +36,7 @@ const AddressList = () => {
               <IconButton
                 onClick={() => {
                   handleDeletePosition(address.position);
+                  setRoute([])
                 }}
               >
                 <DeleteRoundedIcon />
