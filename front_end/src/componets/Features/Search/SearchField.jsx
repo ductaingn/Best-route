@@ -26,7 +26,7 @@ const SearchField = () => {
             label="Search Field"
             variant="outlined"
             value={input}
-            fullWidth
+            style={{width: 300, marginTop: 5}}
             onChange={(e) => {
               setInput(e.target.value);
               const searchString = e.target.value.toLowerCase();
