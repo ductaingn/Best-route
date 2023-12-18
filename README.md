@@ -6,10 +6,9 @@ This work is a team project offered in course *IT3160-Introduction to Artificial
 We used A* algorithm for finding the shortest route between two random location that user chose in Liễu Giai Ward, Ba Đình District, Hà Nội, Việt Nam.
 
 ### Built with
-- Python
-- Flask
-- React
-
+- [![React][React]][React-url]
+- [![Flask][Flask]][Flask-url]
+- ![Python][Python]
 ## Getting Started
 ### Prerequisites
 - [Install NodeJS ](https://nodejs.org/en/download)
@@ -44,6 +43,8 @@ $ npm start
 5. Result may be shown as follow
 
 ## Contributing
+[![Contributors][contributors-shield]][contributors-url]
+
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
@@ -67,3 +68,11 @@ Materials:
 https://vi.wikipedia.org/wiki/Gi%E1%BA%A3i_thu%E1%BA%ADt_t%C3%ACm_ki%E1%BA%BFm_A*
 
 https://www.youtube.com/watch?v=A60q6dcoCjw&t=776s
+
+[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-5-blue?style=flat-square
+[contributors-url]: https://github.com/ductaingn/Best-route/graphs/contributors
+[React]: https://img.shields.io/badge/React-%230088CC?style=flat-square&logo=react
+[React-url]:https://react.dev/
+[Flask]: https://img.shields.io/badge/Flask-%23000000?style=flat-square&logo=flask
+[Flask-url]: https://flask.palletsprojects.com/en/3.0.x/#
+[Python]: https://img.shields.io/badge/Python-%23ECD53F?style=flat-square&logo=python
