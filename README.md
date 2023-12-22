@@ -31,7 +31,7 @@ $ python3 -m venv .venv
 ```
 $ cd back_end
 $ . .venv/bin/activate
-python3 server.py
+$ python3 server.py
 ```
 2. Run the React scripts
 ```
