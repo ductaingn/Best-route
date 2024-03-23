@@ -20,10 +20,23 @@ npm install npm@latest -g
 ### Installation
 1. Clone the repository
 2. Install NPM packages
+```
+$ cd front_end
+$ npm ci
+```
 3. Create a Virtual environment
 ```
 $ cd back_end
 $ python3 -m venv .venv
+```
+4. Install python libraries in Virtual environment
+```
+$ cd back_end
+$ . .venv/bin/activate
+$ pip install numpy
+$ pip install pandas
+$ pip install scikit-learn
+$ pip install haversine
 ```
 
 ## Usage
