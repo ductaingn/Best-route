@@ -1,7 +1,7 @@
 .vscode
 test.py
 back_end/.venv
-back_end/__pycache__
+back_end/__pycache__/
 *.pyc
 __pycache__/
 .pytest_cache/
